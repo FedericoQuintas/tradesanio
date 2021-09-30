@@ -11,4 +11,10 @@ RSpec.describe "RegisterUsers", type: :request do
     expect(response.content_type).to eq("application/json; charset=utf-8")
     expect(JSON.parse(response.body)['email']).to eq(@user_email)
   end  
+
+  it 'fails when email is nil' do
+    post "/users", :params => {} 
+    expect(response).to have_http_status(:bad_request)
+    expect(response.content_type).to eq("application/json; charset=utf-8")
+  end  
 end
