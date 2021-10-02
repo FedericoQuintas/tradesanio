@@ -8,14 +8,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def index
-        if parse_params['email'].blank?
-            render plain: {}.to_json, status: 400, content_type: 'application/json'
-        else 
-            @user = User.find_by(email: parse_params['email'])
-            render plain: {email: @user.email}.to_json, status: 200, content_type: 'application/json'
-        end
-    end
     private
 
     def parse_params
