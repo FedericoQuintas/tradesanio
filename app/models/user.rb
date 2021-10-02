@@ -1,9 +1,4 @@
-class User < ApplicationRecord
-    def initialize(email)
-        @email = email
-    end
+class User < ActiveRecord::Base
+    
 
-    def email
-       @email
-    end
 end
