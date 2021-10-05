@@ -1,0 +1,4 @@
+ rails generate model Watchlist description:string user:references
+ rails generate model User email:string pass:string
+ rails generate model Security ticker:string
+ rails g migration CreateWatchlistSecurities watchlist:references security:references
