@@ -14,3 +14,4 @@ class UsersController < ApplicationController
         params.permit(:email, :pass)
     end
 end
+
