@@ -12,13 +12,18 @@ RSpec.describe "CreateWatchLists", type: :request do
 
   it 'fails when watchlist with same description exists' do
 
+    @user_email = "rolo@namibia.com"
+    @pass = "pa55w0rd"
+
+    post "/users", :params => { :email => @user_email, :pass => @pass} , :headers => {'X-User-ID' => 1}
+
     @description = "crypto"
 
-    post "/watchlists", :params => { :description => @description} 
+    post "/watchlists", :params => { :description => @description}  , :headers => {'X-User-ID' => 1}
     expect(response).to have_http_status(:created)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     expect(JSON.parse(response.body)['description']).to eq(@description)
-    post "/watchlists", :params => { :description => @description} 
+    post "/watchlists", :params => { :description => @description}  , :headers => {'X-User-ID' => 1}
     expect(response).to have_http_status(:bad_request)
     expect(JSON.parse(response.body)['error']).to eq("Description repeated")
     expect(response.content_type).to eq("application/json; charset=utf-8")

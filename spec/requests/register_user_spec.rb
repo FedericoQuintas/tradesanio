@@ -5,7 +5,7 @@ RSpec.describe "RegisterUsers", type: :request do
     @user_email = "rolo@namibia.com"
     @pass = "pa55w0rd"
 
-    post "/users", :params => { :email => @user_email, :pass => @pass} 
+    post "/users", :params => { :email => @user_email, :pass => @pass} , :headers => {'X-User-ID' => 1}
     expect(response).to have_http_status(:created)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     expect(JSON.parse(response.body)['email']).to eq(@user_email)

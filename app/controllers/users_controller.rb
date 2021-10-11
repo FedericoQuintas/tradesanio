@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     def create
-        if parse_params['email'].blank? || parse_params['pass'].blank?
+        if parse_params['email'].blank? || parse_params['pass'].blank? || request.headers['X-User-ID'].blank?
             render plain: {}.to_json, status: 400, content_type: 'application/json'
         else 
             @user = User.create(email: parse_params['email'], pass: parse_params['pass'])
