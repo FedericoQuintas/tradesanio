@@ -15,7 +15,7 @@ RSpec.describe "CreateWatchLists", type: :request do
 
   it 'fails when watchlist with same description exists' do
 
-    allow(Watchlist).to receive(:where).and_return(Watchlist.new(description: description, user_id: 1))
+    expect(Watchlist).to receive(:where).with(description: description, user_id: 1).and_return(Watchlist.new(description: description, user_id: 1))
     post "/watchlists", :params => { :description => description}  , :headers => {'X-User-ID' => 1}
     expect(response).to have_http_status(:bad_request)
     expect(JSON.parse(response.body)['error']).to eq("Description repeated")
