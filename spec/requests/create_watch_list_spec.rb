@@ -15,10 +15,7 @@ RSpec.describe "CreateWatchLists", type: :request do
 
   it 'fails when watchlist with same description exists' do
 
-    @user_email = "rolo@namibia.com"
-    @pass = "pa55w0rd"
-
-    post "/users", :params => { :email => @user_email, :pass => @pass} , :headers => {'X-User-ID' => 1}
+    User.create(email: "rolo@namibia.com", pass: "pa55w0rd")
 
     post "/watchlists", :params => { :description => description}  , :headers => {'X-User-ID' => 1}
     expect(response).to have_http_status(:created)
