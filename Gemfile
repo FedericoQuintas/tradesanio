@@ -46,6 +46,7 @@ group :development do
 end
 
 group :test do
+  gem 'simplecov', require: false
   gem 'shoulda-matchers', '~> 5.0'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
