@@ -12,31 +12,31 @@
 
 ActiveRecord::Schema.define(version: 2021_10_05_171501) do
 
-  create_table "securities", force: :cascade do |t|
+  create_table "securities", charset: "utf8mb3", force: :cascade do |t|
     t.string "ticker"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email"
     t.string "pass"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "watchlist_securities", force: :cascade do |t|
-    t.integer "watchlist_id", null: false
-    t.integer "security_id", null: false
+  create_table "watchlist_securities", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "watchlist_id", null: false
+    t.bigint "security_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["security_id"], name: "index_watchlist_securities_on_security_id"
     t.index ["watchlist_id"], name: "index_watchlist_securities_on_watchlist_id"
   end
 
-  create_table "watchlists", force: :cascade do |t|
+  create_table "watchlists", charset: "utf8mb3", force: :cascade do |t|
     t.string "description"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_watchlists_on_user_id"
