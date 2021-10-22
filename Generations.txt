@@ -2,3 +2,4 @@
  rails generate model User email:string pass:string
  rails generate model Security ticker:string
  rails g migration CreateWatchlistSecurities watchlist:references security:references
+rake environment db:{drop,create,migrate} DISABLE_DATABASE_ENVIRONMENT_CHECK=1
