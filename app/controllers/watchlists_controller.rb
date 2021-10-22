@@ -1,6 +1,6 @@
 class WatchlistsController < ApplicationController
     def create
-        if parse_params['description'].blank?
+        if parse_params['description'].blank? || request.headers['X-User-ID'].blank?
             render plain: {}.to_json, status: 400, content_type: 'application/json'
         else
             if Watchlist.where(:description => parse_params["description"], :user_id => request.headers['X-User-ID']).present?
