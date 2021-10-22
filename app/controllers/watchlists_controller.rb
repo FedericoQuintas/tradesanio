@@ -6,7 +6,7 @@ class WatchlistsController < ApplicationController
             if Watchlist.where(:description => parse_params["description"], :user_id => request.headers['X-User-ID']).present?
                 render plain: {error: "Description repeated"}.to_json, status: 400, content_type: 'application/json' 
             else
-                @watchList = Watchlist.create(description: parse_params["description"], user_id: request.headers['X-User-ID'])
+                @watchList = Watchlist.create!(description: parse_params["description"], user_id: request.headers['X-User-ID'])
                 render plain: {description: @watchList.description}.to_json, status: 201, content_type: 'application/json'
             end
         end

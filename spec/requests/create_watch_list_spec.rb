@@ -5,9 +5,9 @@ RSpec.describe "CreateWatchLists", type: :request do
   let(:description) {
       @description = "crypto"
   }  
-  it 'post /watchlists' do
-
-    post "/watchlists", :params => { :description => description}  , :headers => {'X-User-ID' => 1}
+  it 'post /watchlists creates one successfully' do
+    @user_id = User.create(:pass => "pass", :email => "email").id
+    post "/watchlists", :params => { :description => description}  , :headers => {'X-User-ID' => @user_id}
     expect(response).to have_http_status(:created)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     expect(JSON.parse(response.body)['description']).to eq(description)
@@ -29,6 +29,11 @@ RSpec.describe "CreateWatchLists", type: :request do
   end 
 
   it 'fails when x-user-id header is nil' do
+    post "/watchlists", :params => { :description => description} 
+    expect(response).to have_http_status(:bad_request)
+  end 
+
+  it 'fails when user does not exist' do
     post "/watchlists", :params => { :description => description} 
     expect(response).to have_http_status(:bad_request)
   end 
