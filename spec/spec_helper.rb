@@ -1,5 +1,5 @@
 require 'sequel'
-require 'database_cleaner-sequel'
+require "database_cleaner/active_record"
 require 'simplecov'
 
 SimpleCov.start 'rails'
