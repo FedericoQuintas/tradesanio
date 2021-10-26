@@ -21,6 +21,11 @@ development:
 
 
 production:
+  adapter: mysql2
+  host: localhost
+  pool: 5
   database: tradesanio_db_prod
+  encoding: utf8
+  socket: /tmp/mysql.sock
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASS'] %>

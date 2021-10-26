@@ -6,7 +6,9 @@ RSpec.describe "CreateWatchLists", type: :request do
       @description = "crypto"
   }  
   it 'post /watchlists creates one successfully' do
-    @user_id = User.create(:pass => "pass", :email => "email").id
+    @user = User.new(:email => 'email@com.ar', :password => 'password')
+    @user.save
+    @user_id = @user.id
     post "/watchlists", :params => { :description => description}  , :headers => {'X-User-ID' => @user_id}
     expect(response).to have_http_status(:created)
     expect(response.content_type).to eq("application/json; charset=utf-8")

@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Watchlist, :type => :model do
     let(:user) {
-        @user = User.create(:pass => "pass", :email => "email")
+        @user = User.new(:email => 'email@com.ar', :password => 'password')
+        @user.save
+        @user
     }  
     it do
         should have_and_belong_to_many(:securities)

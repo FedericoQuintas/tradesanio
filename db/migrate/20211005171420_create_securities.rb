@@ -5,5 +5,7 @@ class CreateSecurities < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_index :securities, :ticker,  unique: true
+
   end
 end

@@ -6,8 +6,13 @@ class UsersController < ApplicationController
             if User.where(:email => parse_params['email']).present?
                 render plain: {error: "Email already taken"}.to_json, status: 400, content_type: 'application/json'
             else
-                @user = User.create(email: parse_params['email'], pass: parse_params['pass'])
-                render plain: {email: @user.email}.to_json, status: 201, content_type: 'application/json'
+                @user = User.new(:email => parse_params['email'], :password => parse_params['pass'])
+                if @user.save
+                    render plain: {email: @user.email}.to_json, status: 201, content_type: 'application/json'
+                else
+                    render plain: {}.to_json, status: 400, content_type: 'application/json'
+                end
+
             end
         end
     end
