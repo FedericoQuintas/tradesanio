@@ -39,4 +39,5 @@ RSpec.describe "RegisterUsers", type: :request do
     expect(response).to have_http_status(:bad_request)
     expect(response.content_type).to eq("application/json; charset=utf-8")
   end  
+
 end

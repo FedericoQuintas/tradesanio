@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_182442) do
+ActiveRecord::Schema.define(version: 2021_10_30_151741) do
 
   create_table "securities", charset: "utf8mb3", force: :cascade do |t|
     t.string "ticker"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ticker"], name: "index_securities_on_ticker", unique: true
+  end
+
+  create_table "tokens", charset: "utf8mb3", force: :cascade do |t|
+    t.string "token"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tokens_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -49,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_10_25_182442) do
     t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
+  add_foreign_key "tokens", "users"
   add_foreign_key "watchlist_securities", "securities"
   add_foreign_key "watchlist_securities", "watchlists"
   add_foreign_key "watchlists", "users"
